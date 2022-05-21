@@ -14,7 +14,7 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((data: any) => {
       this.name = data.params.userName;
-      console.log(data);
+      // console.log(data);
     });
   }
 }

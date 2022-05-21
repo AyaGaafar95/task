@@ -1,6 +1,7 @@
-.name {
+p {
   font-size: 5em;
   font-weight: lighter;
+  text-align: center;
   margin-bottom: 0;
   font-family: "Fuzzy Bubbles", cursive;
   color: #fab909;
@@ -8,4 +9,24 @@
   text-shadow: -16px 5px 15px #035361;
   transition: all 0.5s ease-in-out;
   cursor: default;
+}
+
+p:hover {
+  text-shadow: -16px 5px 15px #fab909;
+  color: rgb(129, 124, 124);
+}
+i {
+  color: #22221d;
+  text-shadow: none;
+}
+@media (max-width: 1024px) {
+  .name {
+    font-size: 4em;
+  }
+}
+
+@media (max-width: 750px) {
+  .name {
+    font-size: 2em;
+  }
 }
