@@ -9,6 +9,7 @@
         placeholder="write your name"
         (change)="selectNameOfUse($event)"
       />
+      <!-- error -->
       <p
         class="error"
         *ngIf="
@@ -31,39 +32,22 @@
     <!-- Nationality -->
     <div>
       <label>Nationality</label>
-      <!-- <input
-        formControlName="nationality"
-        type="text"
-        placeholder="write your nationality "
-        name="city"
-        list="cityname"
-      />
-      <datalist id="countryname">
-        <option [value]="country" *ngFor="let country of allCountries">
-          {{ country }}
-        </option>
-      </datalist> -->
-      <!-- <input
-      formControlName="nationality"
-      type="text"
-      placeholder="write your nationality "
-    /> -->
-      <select (change)="getAllCountries()">
+      <select (change)="getAllCountries()" formControlName="nationality">
         <option disabled selected hidden>Please Choose your country</option>
         <option value="{{ country }}" *ngFor="let country of allCountries">
           {{ country }}
         </option>
       </select>
-
-      <!-- <p
+      <!-- error -->
+      <p
         class="error"
         *ngIf="
-          signupForm.controls['email'].errors?.required &&
-          signupForm.controls['email'].touched
+          signupForm.controls['nationality'].errors?.['required'] &&
+          signupForm.controls['nationality'].touched
         "
       >
         You must write your nationality!
-      </p> -->
+      </p>
     </div>
 
     <!-- Email -->
@@ -74,7 +58,7 @@
         type="text"
         placeholder="write your email "
       />
-
+      <!-- error -->
       <p
         class="error"
         *ngIf="
@@ -94,6 +78,7 @@
         type="text"
         placeholder="write your password "
       />
+      <!-- error -->
       <p
         class="error"
         *ngIf="
@@ -114,10 +99,11 @@
         type="text"
         placeholder="write your password confirmation"
       />
+      <!-- error -->
       <p
         class="error"
         *ngIf=" signupForm.controls['passwordConfirmation'].errors?.['required'] &&
-signupForm.controls['passwordConfirmation'].touched"
+             signupForm.controls['passwordConfirmation'].touched"
       >
         this confirmation password is required
       </p>
@@ -131,30 +117,7 @@ signupForm.controls['passwordConfirmation'].touched"
       </p>
     </div>
 
-    <!-- <div>
-      <label>ip adress</label>
-      <input
-        formControlName="ipAdress"
-        type="text"
-        placeholder="write your ip adress "
-        [(ngModel)]="ipAddress"
-      />
-      <p
-      class="error"
-      *ngIf="
-        signupForm.controls.category.errors?.required &&
-        signupForm.controls.category.touched
-      "
-    >
-      You must write your ip adress!
-    </p>
-    </div> -->
-
-    <button
-      type="submit"
-      [disabled]="signupForm.invalid && !passwordWasMatch"
-      (click)="goToWelcomeComponent(nameOfUser)"
-    >
+    <button type="submit" [disabled]="signupForm.invalid && !passwordWasMatch">
       signupForm
     </button>
     <h3>IP Address: {{ ipAddress }}</h3>

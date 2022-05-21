@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { MyApisService } from 'src/app/services/my-apis.service.service';
 
 @Component({
   selector: 'app-welcome',
@@ -9,12 +10,16 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class WelcomeComponent implements OnInit {
   name = '';
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private api: MyApisService
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((data: any) => {
       this.name = data.params.userName;
       // console.log(data);
+      console.log(this.api.userdata);
     });
   }
 }

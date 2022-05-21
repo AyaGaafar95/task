@@ -83,13 +83,15 @@ export class SignupComponent implements OnInit {
     this.nameOfUser = e.target.value;
   }
   submitInfo(data: any) {
-    console.log(data.value);
+    this.myapi.userdata = data.value.name;
+    localStorage.setItem('Token', Math.random().toString(36).substr(2));
+    this.router.navigateByUrl(`/info/${data.value.name}`);
   }
-  goToWelcomeComponent(nameOfUser: any) {
-    this.router.navigateByUrl(`/info/${nameOfUser}`);
-    // if (localStorage.getItem('token')) {
-    //   return localStorage.removeItem('token');
-    // }
-    // return localStorage.setItem('token', Math.random().toString(36).substr(2));
-  }
+  // goToWelcomeComponent(nameOfUser: any) {
+  //   this.router.navigateByUrl(`/info/${nameOfUser}`);
+  //   // if (localStorage.getItem('token')) {
+  //   //   return localStorage.removeItem('token');
+  //   // }
+  //   // return localStorage.setItem('token', Math.random().toString(36).substr(2));
+  // }
 }

@@ -17,6 +17,7 @@ https://ipapi.co/${ip-adress}/json/
   providedIn: 'root',
 })
 export class MyApisService {
+  userdata = {};
   constructor(private client: HttpClient) {}
   getCityInformation(): Observable<any> {
     return this.client.get(
