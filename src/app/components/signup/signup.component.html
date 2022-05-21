@@ -1,6 +1,7 @@
 <div class="container">
   <form [formGroup]="signupForm" (ngSubmit)="submitInfo(signupForm)">
     <div>
+      <!-- name -->
       <label>Name</label>
       <input
         formControlName="name"
@@ -11,14 +12,23 @@
       <p
         class="error"
         *ngIf="
-          signupForm.controls.name.errors?.required &&
-          signupForm.controls.name.touched
+          signupForm.controls['name'].errors?.['required'] &&
+          signupForm.controls['name'].touched
         "
       >
         You must write your name!
       </p>
+      <p
+        class="error"
+        *ngIf="
+         signupForm.controls['name'].errors?.['pattern']
+      "
+      >
+        should eng
+      </p>
     </div>
 
+    <!-- Nationality -->
     <div>
       <label>Nationality</label>
       <!-- <input
@@ -38,24 +48,25 @@
       type="text"
       placeholder="write your nationality "
     /> -->
-      <select (change)="getAllCountries($event)">
+      <select (change)="getAllCountries()">
         <option disabled selected hidden>Please Choose your country</option>
         <option value="{{ country }}" *ngFor="let country of allCountries">
           {{ country }}
         </option>
       </select>
 
-      <p
+      <!-- <p
         class="error"
         *ngIf="
-          signupForm.controls.category.errors?.required &&
-          signupForm.controls.category.touched
+          signupForm.controls['email'].errors?.required &&
+          signupForm.controls['email'].touched
         "
       >
         You must write your nationality!
-      </p>
+      </p> -->
     </div>
 
+    <!-- Email -->
     <div>
       <label>Email</label>
       <input
@@ -67,14 +78,15 @@
       <p
         class="error"
         *ngIf="
-          signupForm.controls.category.errors?.required &&
-          signupForm.controls.category.touched
+        signupForm.controls['email'].errors?.['required'] &&
+        signupForm.controls['email'].touched
         "
       >
         You must write your email!
       </p>
     </div>
 
+    <!-- Password -->
     <div>
       <label>Password</label>
       <input
@@ -85,31 +97,37 @@
       <p
         class="error"
         *ngIf="
-          signupForm.controls.category.errors?.required &&
-          signupForm.controls.category.touched
+        signupForm.controls['password'].errors?.['required'] &&
+        signupForm.controls['password'].touched
         "
       >
         You must write your password!
       </p>
     </div>
 
+    <!-- password confirmation -->
     <div>
       <label>password confirmation</label>
       <input
+        (change)="checkPasswordMatch($event)"
         formControlName="passwordConfirmation"
         type="text"
         placeholder="write your password confirmation"
       />
-      // controls['category'].errors f.controlName.errors
-
       <p
         class="error"
+        *ngIf=" signupForm.controls['passwordConfirmation'].errors?.['required'] &&
+signupForm.controls['passwordConfirmation'].touched"
+      >
+        this confirmation password is required
+      </p>
+      <p
         *ngIf="
-          signupForm.controls.['category'].errors?.['required'] &&
-          signupForm.controls.['category'].touched
+          !passwordWasMatch &&
+          signupForm.controls['passwordConfirmation'].value.length > 0
         "
       >
-        You must write your password confirmation!
+        The password does not match
       </p>
     </div>
 
@@ -134,10 +152,10 @@
 
     <button
       type="submit"
-      [disabled]="!signupForm.valid"
+      [disabled]="signupForm.invalid && !passwordWasMatch"
       (click)="goToWelcomeComponent(nameOfUser)"
     >
-      Save
+      signupForm
     </button>
     <h3>IP Address: {{ ipAddress }}</h3>
     <!-- <h2>{{ theNameofCountry }}</h2> -->

@@ -18,31 +18,25 @@ export class SignupComponent implements OnInit {
   country: string = ' ';
   nameOfUser: string = ' ';
   conditionPassword = false;
+  passwordWasMatch = false;
 
   // form and validation
   signupForm = new FormGroup({
     name: new FormControl('', [
       Validators.required,
-      Validators.pattern('[a-zA-Z]'),
+      Validators.pattern(/[a-zA-Z]/g),
     ]),
     nationality: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern('[\u0621-\u064A0-9 ]+$'),
+      Validators.pattern('[a-zA-Z0-9-()]*'),
       Validators.minLength(8),
     ]),
 
     passwordConfirmation: new FormControl('', [Validators.required]),
     ipAdress: new FormControl(),
   });
-  // ConfirmedValidator(password, passwordConfirmation) {
-  //   if (password == passwordConfirmation) {
-  //     this.conditionPassword = true;
-  //   }
-  // }
-  //validator: ConfirmedValidator('password', 'confirm_password')
-  // const control = new FormControl('ng', Validators.minLength(3));
 
   constructor(private myapi: MyApisService, private router: Router) {}
 
@@ -50,11 +44,18 @@ export class SignupComponent implements OnInit {
     this.getAllCountries();
     this.catchIp();
     this.catchNameOfCountry();
+    // this.selectNameOfUse('aya');
+    // console.log(this.nameOfUser);
   }
 
-  get f() {
-    return this.signupForm.controls;
+  checkPasswordMatch(e: any) {
+    if (e.target.value == this.signupForm.controls['password'].value) {
+      this.passwordWasMatch = true;
+    } else {
+      this.passwordWasMatch = false;
+    }
   }
+
   getAllCountries() {
     this.myapi.getCityInformation().subscribe((a: any) => {
       for (let i = 0; i < a.length; i++) {
@@ -84,7 +85,11 @@ export class SignupComponent implements OnInit {
   submitInfo(data: any) {
     console.log(data.value);
   }
-  goToWelcomeComponent(username: any) {
-    this.router.navigateByUrl(`/info/${username}`);
+  goToWelcomeComponent(nameOfUser: any) {
+    this.router.navigateByUrl(`/info/${nameOfUser}`);
+    // if (localStorage.getItem('token')) {
+    //   return localStorage.removeItem('token');
+    // }
+    // return localStorage.setItem('token', Math.random().toString(36).substr(2));
   }
 }
