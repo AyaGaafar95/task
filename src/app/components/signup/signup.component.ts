@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
       Validators.required,
       Validators.pattern(/[a-zA-Z]/g),
     ]),
-    nationality: new FormControl(null, [Validators.required]),
+    nationality: new FormControl('', [Validators.required]),
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [
       Validators.required,
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
     this.getAllCountries();
     this.catchIp();
     this.catchNameOfCountry();
-    // console.log(this.nameOfUser);
+    console.log(this.allCountries);
   }
 
   checkPasswordMatch(e: any) {
@@ -86,6 +86,8 @@ export class SignupComponent implements OnInit {
     localStorage.setItem('Token', Math.random().toString(36).substr(2));
     this.router.navigateByUrl(`/info/${data.value.name}`);
   }
+  // this.nameOfUser = data.value.name
+
   // goToWelcomeComponent(nameOfUser: any) {
   //   this.router.navigateByUrl(`/info/${nameOfUser}`);
   //   // if (localStorage.getItem('token')) {

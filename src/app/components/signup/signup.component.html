@@ -91,7 +91,13 @@
       >
         You must write your password!
       </p>
-      <p *ngIf="signupForm.controls['passwordConfirmation'].value.length > 8">
+      <p
+        class="error"
+        *ngIf="
+          signupForm.controls['passwordConfirmation'].value != null &&
+          signupForm.controls['passwordConfirmation'].value.length > 8
+        "
+      >
         password minlength 8 char
       </p>
     </div>
@@ -113,14 +119,22 @@
         this confirmation password is required
       </p>
       <p
+        class="error"
         *ngIf="
           !passwordWasMatch &&
+          signupForm.controls['passwordConfirmation'].value != null &&
           signupForm.controls['passwordConfirmation'].value.length > 0
         "
       >
         The password does not match
       </p>
-      <p *ngIf="signupForm.controls['passwordConfirmation'].value.length > 8">
+      <p
+        class="error"
+        *ngIf="
+          signupForm.controls['passwordConfirmation'].value != null &&
+          signupForm.controls['passwordConfirmation'].value.length > 8
+        "
+      >
         password minlength 8 char
       </p>
     </div>
