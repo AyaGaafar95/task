@@ -22,19 +22,19 @@ export class SignupComponent implements OnInit {
 
   // form and validation
   signupForm = new FormGroup({
-    name: new FormControl('', [
+    name: new FormControl(null, [
       Validators.required,
       Validators.pattern(/[a-zA-Z]/g),
     ]),
-    nationality: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
+    nationality: new FormControl(null, [Validators.required]),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [
       Validators.required,
       Validators.pattern('[a-zA-Z0-9-()]*'),
       Validators.minLength(8),
     ]),
 
-    passwordConfirmation: new FormControl('', [Validators.required]),
+    passwordConfirmation: new FormControl(null, [Validators.required]),
     ipAdress: new FormControl(),
   });
 
@@ -44,7 +44,6 @@ export class SignupComponent implements OnInit {
     this.getAllCountries();
     this.catchIp();
     this.catchNameOfCountry();
-    // this.selectNameOfUse('aya');
     // console.log(this.nameOfUser);
   }
 

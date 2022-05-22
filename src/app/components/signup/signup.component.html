@@ -68,6 +68,9 @@
       >
         You must write your email!
       </p>
+      <div *ngIf="signupForm.controls['email'].errors?.['email']">
+        Email not valid.
+      </div>
     </div>
 
     <!-- Password -->
@@ -75,7 +78,7 @@
       <label>Password</label>
       <input
         formControlName="password"
-        type="text"
+        type="password"
         placeholder="write your password "
       />
       <!-- error -->
@@ -88,6 +91,9 @@
       >
         You must write your password!
       </p>
+      <p *ngIf="signupForm.controls['passwordConfirmation'].value.length > 8">
+        password minlength 8 char
+      </p>
     </div>
 
     <!-- password confirmation -->
@@ -96,14 +102,13 @@
       <input
         (change)="checkPasswordMatch($event)"
         formControlName="passwordConfirmation"
-        type="text"
+        type="password"
         placeholder="write your password confirmation"
       />
       <!-- error -->
       <p
         class="error"
-        *ngIf=" signupForm.controls['passwordConfirmation'].errors?.['required'] &&
-             signupForm.controls['passwordConfirmation'].touched"
+        *ngIf=" signupForm.controls['passwordConfirmation'].errors?.['required'] && signupForm.controls['password'].touched"
       >
         this confirmation password is required
       </p>
@@ -114,6 +119,9 @@
         "
       >
         The password does not match
+      </p>
+      <p *ngIf="signupForm.controls['passwordConfirmation'].value.length > 8">
+        password minlength 8 char
       </p>
     </div>
 
