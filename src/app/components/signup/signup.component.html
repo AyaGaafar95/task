@@ -95,7 +95,7 @@
         class="error"
         *ngIf="
           signupForm.controls['password'].value != null &&
-          signupForm.controls['password'].value.length > 8
+          signupForm.controls['password'].value.length < 8
         "
       >
         password minlength 8 char
@@ -122,8 +122,7 @@
         class="error"
         *ngIf="
           !passwordWasMatch &&
-          signupForm.controls['passwordConfirmation'].value != null &&
-          signupForm.controls['passwordConfirmation'].value.length > 0
+          signupForm.controls['passwordConfirmation'].value != null
         "
       >
         The password does not match
@@ -132,7 +131,7 @@
         class="error"
         *ngIf="
           signupForm.controls['passwordConfirmation'].value != null &&
-          signupForm.controls['passwordConfirmation'].value.length > 8
+          signupForm.controls['passwordConfirmation'].value.length < 8
         "
       >
         password minlength 8 char
