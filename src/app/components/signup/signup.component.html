@@ -121,10 +121,7 @@
       >
         this confirmation password is required
       </p>
-      <p
-        class="error"
-        *ngIf="!passwordWasMatch && signupForm.controls['password'].touched"
-      >
+      <p class="error" *ngIf="!passwordWasMatch">
         The password should be match
       </p>
       <p
