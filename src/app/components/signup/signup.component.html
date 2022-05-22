@@ -86,7 +86,8 @@
         class="error"
         *ngIf="
         signupForm.controls['password'].errors?.['required'] &&
-        signupForm.controls['password'].value.length < 0
+        signupForm.controls['password'].touched
+
 
         "
       >
@@ -115,18 +116,16 @@
       <!-- error -->
       <p
         class="error"
-        *ngIf=" signupForm.controls['passwordConfirmation'].errors?.['required'] &&  signupForm.controls['password'].value.length < 0"
+        *ngIf=" signupForm.controls['passwordConfirmation'].errors?.['required']
+        &&  signupForm.controls['passwordConfirmation'].value != null "
       >
         this confirmation password is required
       </p>
       <p
         class="error"
-        *ngIf="
-          !passwordWasMatch &&
-          signupForm.controls['passwordConfirmation'].value != null
-        "
+        *ngIf="!passwordWasMatch && signupForm.controls['password'].touched"
       >
-        The password does not match
+        The password should be match
       </p>
       <p
         class="error"
@@ -145,5 +144,6 @@
     <h3>IP Address: {{ ipAddress }}</h3>
     <!-- <h2>{{ theNameofCountry }}</h2> -->
     <!-- signupForm.controls['password'].touched -->
+    <!-- signupForm.controls['password'].value.length < 0 -->
   </form>
 </div>
