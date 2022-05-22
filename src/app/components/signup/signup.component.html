@@ -68,9 +68,9 @@
       >
         You must write your email!
       </p>
-      <div *ngIf="signupForm.controls['email'].errors?.['email']">
+      <p class="error" *ngIf="signupForm.controls['email'].errors?.['email']">
         Email not valid.
-      </div>
+      </p>
     </div>
 
     <!-- Password -->
@@ -94,8 +94,8 @@
       <p
         class="error"
         *ngIf="
-          signupForm.controls['passwordConfirmation'].value != null &&
-          signupForm.controls['passwordConfirmation'].value.length > 8
+          signupForm.controls['password'].value != null &&
+          signupForm.controls['password'].value.length > 8
         "
       >
         password minlength 8 char
