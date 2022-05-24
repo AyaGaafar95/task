@@ -123,7 +123,11 @@
       </p>
       <p
         class="error"
-        *ngIf="!passwordWasMatch && signupForm.controls['password'].touched"
+        *ngIf="
+          !passwordWasMatch &&
+          signupForm.controls['password'].touched &&
+          signupForm.controls['passwordConfirmation'].value.length < 0
+        "
       >
         The password should be match
       </p>
